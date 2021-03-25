@@ -1,0 +1,151 @@
+<body>
+
+<html>
+   
+<head>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+</head>
+
+    <body>
+
+        <div id="Scoreboard">
+
+            <div class="Score">
+                <h1> Player Score</h1>
+                <div id ="PlayerScoreboard" class="Scoreboard2">
+
+                </div>
+            </div>
+
+            <div class="Score">
+                <h1> Computer Score</h1>
+                <div id ="ComputerScoreboard" class="Scoreboard2">
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="Player">
+            <h2> Schere, Stein oder Papier?</h2>
+            <div id="PlayerChoice">
+                
+                <div id="Rock" class="Choice">
+                    <i class="fas fa-hand-rock"></i>
+                </div>
+                
+                <div id="Paper" class="Choice">
+                    <i class="fas fa-toilet-paper"></i>
+                </div>
+
+                <div id="Scissors" class="Choice">
+                    <i class="fas fa-cut"></i>
+                </div>
+
+
+            </div>
+
+            <p id="WahlFeld" style="font-weight:bold"> Starte ein neues Spiel </p>
+
+            <p id="TextFeld"> </p>
+    </div>
+
+
+
+
+    </body>
+
+</html>
+
+
+
+<script>
+
+let choise = ["rock", "paper", "scissors"];
+let computerSelection = "";
+let playerSelection= "";
+let playerScore = 0;
+let computerScore = 0;
+
+let wahlFeld = document.getElementById('WahlFeld');
+let playerScoreBoard = document.getElementById('PlayerScoreboard');
+let computerScoreBoard = document. getElementById('ComputerScoreboard');
+let textFeld = document.getElementById('TextFeld');
+
+function computerPlay() {
+ computerSelection = choise[Math.floor(Math.random()*choise.length)];
+ wahlFeld.textContent = "Der Computer wählt " + computerSelection;
+ console.log(computerSelection);
+ return computerSelection;
+}
+
+function PlayRound(playerSelection, computerSelection) {
+    
+    TextFeld.style.color = "black";
+    if (playerSelection == computerSelection){
+        RundenErgebnis = 'Unentschieden';
+    } else if (playerSelection == "rock" && computerSelection == "scissors" || playerSelection == "paper" && computerSelection == "rock"
+                 || playerSelection == "scissors" && computerSelection == "paper") {
+                    
+                    RundenErgebnis = 'Runde gewonnen';
+                    playerScore ++;
+    } else {
+        RundenErgebnis = 'Runde verloren';
+        computerScore ++;
+    }
+    TextFeld.textContent = RundenErgebnis;
+    playerScoreBoard.textContent = playerScore.toString();
+    computerScoreBoard.textContent = computerScore.toString();
+    return RundenErgebnis;
+}
+
+function game() {
+
+       
+    let RundenErgebnis = PlayRound(playerSelection, computerPlay());     
+    console.log("Runde gespielt");
+    
+    if (playerScore == 3){
+
+        TextFeld.textContent = "Du hast das Spiel "+ playerScore + " zu " + computerScore + " gewonnen :)";
+        TextFeld.style.color = "green";
+        resetGame();
+    }
+    
+    if (computerScore == 3){
+        TextFeld.textContent = "Du hast das Spiel leider "+ playerScore + " zu " + computerScore + " verloren :(";
+        TextFeld.style.color = "red";
+        resetGame();
+    }
+            
+        
+    
+
+        return;
+}
+
+const test2 = document.querySelectorAll('.Choice');
+
+test2.forEach((Choice) => {
+    Choice.addEventListener('click', () => {
+        playerSelection  = Choice.id.toLowerCase() ;
+        console.log(playerSelection);
+        game();
+    });
+})
+
+
+function resetGame () {
+    playerScore = 0;
+    computerScore = 0;
+}
+
+
+
+// console.log(game());
+
+</script>
+
+</body>
